@@ -83,6 +83,10 @@ fn main() {
                 print!("{:02x} ", byte);
             }
 
+            for _ in chunk.len()..16 {
+                print!(".. ");
+            }
+
             print!(" [");
             for byte in chunk {
                 if *byte >= 32 && *byte < 127 {
@@ -90,6 +94,9 @@ fn main() {
                 } else {
                     print!(".");
                 }
+            }
+            for _ in chunk.len()..16 {
+                print!(".");
             }
             println!("]");
         }
