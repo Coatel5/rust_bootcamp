@@ -79,12 +79,23 @@ fn main() {
             let addr = offset as usize + i * 16;
             print!("{:08x}: ", addr);
 
-            for byte in chunk {
-                print!("{:02x} ", byte);
+            for (j, byte) in chunk.iter().enumerate() {
+                if j == 15 {
+                    print!("{:02x}", byte);
+                } else {
+                    print!("{:02x} ", byte);
+                }
             }
 
-            for _ in chunk.len()..16 {
-                print!(".. ");
+            let padding = 16 - chunk.len();
+            if padding > 0 {
+                for p in 0..padding {
+                    if chunk.len() + p == 15 {
+                        print!("..");
+                    } else {
+                        print!(".. ");
+                    }
+                }
             }
 
             print!("|");
