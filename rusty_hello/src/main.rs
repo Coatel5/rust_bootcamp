@@ -15,18 +15,13 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let message: String;
-
-    if args.upper {
-        message = format!("HELLO, {}!", args.name.to_uppercase());
+    let message = if args.upper {
+        format!("HELLO, {}!", args.name.to_uppercase())
     } else {
-        message = format!("Hello, {}!", args.name);
-    }
+        format!("Hello, {}!", args.name)
+    };
 
-    
-    let mut i: u32 = 0;
-    while i < args.repeat {
-        println!("{}", &message);  
-        i = i + 1;
+    for _ in 0..args.repeat {
+        println!("{message}");
     }
 }
