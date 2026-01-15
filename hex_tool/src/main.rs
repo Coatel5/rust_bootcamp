@@ -84,10 +84,10 @@ fn main() {
             }
 
             for _ in chunk.len()..16 {
-                print!("   ");
+                print!(".. ");
             }
 
-            print!(" [");
+            print!(" |");
             for byte in chunk {
                 if *byte >= 32 && *byte < 127 {
                     print!("{}", *byte as char);
@@ -95,7 +95,10 @@ fn main() {
                     print!(".");
                 }
             }
-            println!("]");
+            for _ in chunk.len()..16 {
+                print!(".");
+            }
+            println!("|");
         }
     } else {
         eprintln!("error");
