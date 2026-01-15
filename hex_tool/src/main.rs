@@ -84,7 +84,7 @@ fn main() {
             }
 
             for _ in chunk.len()..16 {
-                print!(".. ");
+                print!("   ");
             }
 
             print!(" [");
@@ -94,9 +94,6 @@ fn main() {
                 } else {
                     print!(".");
                 }
-            }
-            for _ in chunk.len()..16 {
-                print!(".");
             }
             println!("]");
         }
