@@ -68,11 +68,7 @@ fn main() {
         match args.size {
             Some(s) => {
                 buffer.resize(s, 0);
-                file.read_exact(&mut buffer).unwrap_or_else(|_| {
-                    buffer.clear();
-                    file.seek(SeekFrom::Start(offset)).unwrap();
-                    file.read_to_end(&mut buffer).unwrap();
-                });
+                let _ = file.read(&mut buffer);
             }
             None => {
                 file.read_to_end(&mut buffer).unwrap();
@@ -81,14 +77,10 @@ fn main() {
 
         for (i, chunk) in buffer.chunks(16).enumerate() {
             let addr = offset as usize + i * 16;
-            print!("{:08X}: ", addr);
+            print!("{:08x}: ", addr);
 
             for byte in chunk {
                 print!("{:02x} ", byte);
-            }
-
-            for _ in chunk.len()..16 {
-                print!(".. ");
             }
 
             print!(" [");
@@ -98,9 +90,6 @@ fn main() {
                 } else {
                     print!(".");
                 }
-            }
-            for _ in chunk.len()..16 {
-                print!(".");
             }
             println!("]");
         }
